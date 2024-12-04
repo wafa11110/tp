@@ -1,6 +1,5 @@
 import ply.lex as lex
 
-# Liste des mots réservés
 reserved = {
     'actor': 'ACTOR',
     'as': 'AS',
@@ -12,7 +11,6 @@ reserved = {
     '@enduml': 'ENDUML'
 }
 
-# Liste des tokens
 tokens = [
     'COLON',
     'RIGHT_ARROW_1',
@@ -28,14 +26,13 @@ tokens = [
     'ID',
 ] + list(reserved.values())
 
-# Définitions des règles pour chaque token
 t_COLON = r':'
 t_RIGHT_ARROW_1 = r'-->|->'
 t_RIGHT_ARROW_2 = r'\.\.>|\.\.|\.>'
 t_LBRACE = r'\{'
 t_RBRACE = r'\}'
 t_INHERIT = r'<\|--'
-t_ignore = ' \t'  # Espaces et tabulations sont ignorés
+t_ignore = ' \t'  
 
 
 def t_EOL(t):
@@ -70,7 +67,7 @@ def t_USE_CASE_TEXT(t):
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reserved.get(t.value, 'ID')  # Vérifie si c'est un mot réservé
+    t.type = reserved.get(t.value, 'ID')  
     return t
 
 
@@ -79,10 +76,8 @@ def t_error(t):
     t.lexer.skip(1)
 
 
-# Construction du lexer
 lexer = lex.lex()
 
-# Exemple de test
 if _name_ == "_main_":
     data = '''
     @startuml System
